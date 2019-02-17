@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Dashboard Application
 
 ## Available Scripts
 
@@ -15,7 +15,7 @@ You will also see any lint errors in the console.
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Asserting that create, update, and delete are being heard and changing the state to log the event to the page
 
 ### `npm run build`
 
@@ -23,46 +23,38 @@ Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Running the APP
+* There are two backend servers which serve this app (see the UML for more details) and one front end application. 
 
-### `npm run eject`
+### The API Server
+* This server is running on Heroku at the following address: 
+https://eivy-lab-13-pretty.herokuapp.com/api/v1/products <br>
+https://eivy-lab-13-pretty.herokuapp.com/api/v1/categories <br>
+* This server holds the models for the Mongo DB and fetches the information requested
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### The Q Server
+* This server is also running on Heroku at hte following address:
+https://eivy-q-server.herokuapp.com/ <br>
+* This is the 'middle-man' server that is listening for events and broadcasting when events occur. This is the server that is allowing the API server and the front end React App to communicate. The connective tissue, of this applicaiton, if you will.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### The Front End - Dashboard
+* The front end is a React App that is running on http://localahost:3000
+* you can launch the front end by entering the following command in your terminal: `npm start`
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Connecting and Running the APP
+* The purpose of this app is to provide a way for the front end to monitor events that are occuring in the backend database. Every time a 'CREATE', 'UPDATE', or 'DELETE' is requested on the backend, that event gets logged on our Dashboard React App along with the id of the record. 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* To run the app, do the following things:
+1. make sure your Dashboard App is up and running by entering `npm start`
+2. **ADD A RECORD** to the backend database by running the following command from your terminal:
+```curl -H "Content-Type: application/json" -d '{"name":"cats"}' https://eivy-lab-13-pretty.herokuapp.com/api/v1/products```
+* This will add a record to your products and you will see in your dashboard that a record was added
+* This will also returnn the record to your terminal so copy the ID because we will use it in the next step
+3. **UPDATE A RECORD** by running the following command and replacing {ID} with the ID that you coppied in the previous step
+```curl -X PUT -H "Content-Type: application/json" -d '{"name":"catedit","id":"{ID"}' https://eivy-lab-13-pretty.herokuapp.com/api/v1/{ID}```
+4. **DELETE A RECORD** by running the following command and replacing {ID} with the ID that you copied
+```curl -X DELETE  https://eivy-lab-13-pretty.herokuapp.com/api/v1/products/{ID}```
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## UML
+![](./src/assets/uml.jpg)
