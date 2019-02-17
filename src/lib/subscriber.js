@@ -2,6 +2,8 @@ import io from "socket.io-client";
 
 const SERVER = process.env.REACT_APP_Q_SERVER || "https://eivy-q-server.herokuapp.com";
 
+console.log('subscriber included with', SERVER)
+
 /** Class representing a subscriber instance to the Queue. */
 class Q {
   constructor(q) {
