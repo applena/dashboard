@@ -1,5 +1,6 @@
 import React from "react";
 import Dashboard from "./Dashboard.js";
+import './design/core.scss';
 
 const App = () => {
   return (
