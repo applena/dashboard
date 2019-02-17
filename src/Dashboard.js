@@ -14,20 +14,53 @@ class Dashboard extends React.Component {
     client.subscribe("create", payload => {
       this.updateActions(payload);
     });
+
+    client.subscribe("update", payload => {
+      this.updateActions(payload);
+    })
+
+    client.subscribe("delete", payload => {
+      this.updateActions(payload);
+    })
   }
+
+  // deleteActions = data => {
+  //   let newArr = [];
+  //   console.log('updating a single recrod in the dashboard', data);
+  //   this.state.actions.filter(record => {
+  //     if(record.id !== data.id){
+  //       newArr.push(record);
+  //     }
+  //   });
+  //   this.setState({actions: newArr});
+  // }
+
+  // changeActions = data => {
+  //   let newArr = [];
+  //   console.log('updating a single recrod in the dashboard', data);
+  //   this.state.actions.map(record => {
+  //     if(record.id === data.id){
+  //       record = data;
+  //     }
+  //     newArr.push(record);
+  //   });
+  //   this.setState({actions: newArr});
+  // }
 
   //[collection: 'teams', id:'123', actio:'create']
   updateActions = data => {
+    console.log('updating the actions state in dashboard', data);
     this.setState({ actions: [...this.state.actions, data] });
   };
 
   render() {
+    console.log('state',this.state)
     return (
       <>
         <ul>
           {this.state.actions.map((action, idx) => (
             <li key={idx}>
-              {action.collection} : {action.action} : {action.idx}
+              {action.collections} : {action.action} : {action.id}
             </li>
           ))}
         </ul>
