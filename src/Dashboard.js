@@ -1,8 +1,5 @@
 import React from "react";
-// import io from 'socket.io-client';
 import ClientConnection from "./lib/subscriber";
-
-const client = new ClientConnection("database");
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -10,42 +7,21 @@ class Dashboard extends React.Component {
     this.state = {
       actions: []
     };
+    this.client = new ClientConnection("database");
 
-    client.subscribe("create", payload => {
-      this.updateActions(payload);
+    this.client.subscribe("create", payload => {
+      console.log('maypload', payload);
+      this.updateActions(payload.payload);
     });
 
-    client.subscribe("update", payload => {
-      this.updateActions(payload);
+    this.client.subscribe("update", payload => {
+      this.updateActions(payload.payload);
     })
 
-    client.subscribe("delete", payload => {
-      this.updateActions(payload);
+    this.client.subscribe("delete", payload => {
+      this.updateActions(payload.payload);
     })
   }
-
-  // deleteActions = data => {
-  //   let newArr = [];
-  //   console.log('updating a single recrod in the dashboard', data);
-  //   this.state.actions.filter(record => {
-  //     if(record.id !== data.id){
-  //       newArr.push(record);
-  //     }
-  //   });
-  //   this.setState({actions: newArr});
-  // }
-
-  // changeActions = data => {
-  //   let newArr = [];
-  //   console.log('updating a single recrod in the dashboard', data);
-  //   this.state.actions.map(record => {
-  //     if(record.id === data.id){
-  //       record = data;
-  //     }
-  //     newArr.push(record);
-  //   });
-  //   this.setState({actions: newArr});
-  // }
 
   //[collection: 'teams', id:'123', actio:'create']
   updateActions = data => {
