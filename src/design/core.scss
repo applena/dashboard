@@ -1,0 +1,16 @@
+body{
+  background-color: rgb(245, 212, 245);
+  color: #111;
+
+  ul {
+
+    li{
+      background-color: lightblue;
+      box-shadow: 2px 2px;
+      border: 1px double gray;
+      list-style: none;
+      margin: 5px 0;
+      padding: 10px;
+    }
+  }
+}
