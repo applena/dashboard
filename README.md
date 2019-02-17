@@ -1,5 +1,9 @@
 # Dashboard Application
 
+## Links
+[git repo](https://github.com/applena/dashboard)
+[travis](https://travis-ci.com/applena/dashboard.svg?branch=master)
+
 ## Available Scripts
 
 In the project directory, you can run:
