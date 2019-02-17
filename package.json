@@ -5,8 +5,8 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "react": "16.7.0-alpha.2 - next",
-    "react-dom": "16.7.0-alpha.2 - next",
+    "react": "16.8.2",
+    "react-dom": "16.8.2",
     "react-scripts": "2.1.1",
     "reactn": "0.1.6",
     "socket.io": "2.2.0",
